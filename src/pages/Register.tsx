@@ -29,6 +29,7 @@ function Register() {
      setLoading(true)
      setError('')
      const response = await axios.post("http://localhost:3000/api/auth/register", formData); 
+     console.log(response.data)
      setLoading(false)
      navigate("/login")
     } catch (error: any) {
