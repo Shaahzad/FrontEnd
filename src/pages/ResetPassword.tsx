@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { Container, Form, Button, Alert, Row, Col } from "react-bootstrap";
+import { Container, Form, Button, Alert, Row, Col, Card } from "react-bootstrap";
 import axios from "axios";
 
 const ResetPassword = () => {
@@ -37,9 +37,11 @@ const ResetPassword = () => {
   };
 
   return (
-    <Container className="d-flex justify-content-center align-items-center min-vh-100">
-      <Row className="w-100" style={{ maxWidth: "500px" }}>
-        <Col>
+    <Container fluid className="min-vh-100 d-flex align-items-center justify-content-center bg-light">
+      <Row className="w-100 justify-content-center">
+        <Col md={6} lg={4}> 
+          <Card className="shadow-sm border-0">
+          <Card.Body className="p-4">
           <h3 className="text-center mb-4">Reset Your Password</h3>
           {error && <Alert variant="danger">{error}</Alert>}
           {message && <Alert variant="success">{message}</Alert>}
@@ -60,6 +62,8 @@ const ResetPassword = () => {
               {loading ? "Resetting..." : "Reset Password"}
             </Button>
           </Form>
+          </Card.Body>
+          </Card>
         </Col>
       </Row>
     </Container>
