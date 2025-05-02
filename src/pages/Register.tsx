@@ -4,6 +4,7 @@ import Button from 'react-bootstrap/Button';
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import useUserStore from "../../Admin/src/store/Store";
 
 
 type FormData = {
@@ -18,6 +19,7 @@ function Register() {
   const [formData, setFormData] = useState<FormData>({ username: "", role: "", email: "", password: ""});
   const [error, setError] = useState('');
   const [loading, setLoading] = useState<boolean>(false);
+  const addUser = useUserStore((state) => state.addUser);
   const navigate = useNavigate()
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -35,6 +37,7 @@ function Register() {
      setError('')
      const response = await axios.post("http://localhost:3000/api/auth/register", formData); 
      console.log(response.data)
+     addUser(response.data)
      setLoading(false)
      navigate("/login")
     } catch (error: any) {
