@@ -73,12 +73,7 @@ const EditUser: React.FC = () => {
         );
         updateUser(response.data._id, response.data);
         setLoading(false);
-        if (response.data.role === 'user') {
-          navigate('/home');
-        } else {
-          navigate('/admin'); 
-        }
-  
+        navigate('/admin');
       } catch (error) {
         console.log('Error updating user:', error);
         setError('Error updating user');
