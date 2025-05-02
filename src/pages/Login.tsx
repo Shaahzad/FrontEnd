@@ -31,8 +31,12 @@ function Login() {
      const { token, user} = response.data;
      localStorage.setItem('token', token)
      localStorage.setItem('user', JSON.stringify(user))
+     if(user.role !== 'admin'){
+       navigate("/home")
+     }else{
+       navigate("/admin")
+     }
      setLoading(false)
-     navigate("/home")
     } catch (error: any) {
       setError(error.response.data.message)
       console.log(error.response.data.message)

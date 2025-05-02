@@ -8,17 +8,22 @@ import { useNavigate } from "react-router-dom";
 
 type FormData = {
     username: string;
+    role: string;
     email: string;
     password: string;
   };
   
   
 function Register() {
-  const [formData, setFormData] = useState<FormData>({ username: "", email: "", password: "" });
+  const [formData, setFormData] = useState<FormData>({ username: "", role: "", email: "", password: ""});
   const [error, setError] = useState('');
   const [loading, setLoading] = useState<boolean>(false);
   const navigate = useNavigate()
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleRoleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
@@ -70,6 +75,19 @@ function Register() {
               {error && <p className="text-danger">{error}</p>}
             </Form.Group>
 
+
+            <Form.Group className="mb-3">
+              <Form.Select
+               onChange={handleRoleChange}
+               className="rounded-4"
+               name="role"
+               value={formData.role}
+               >
+                <option>Select Role</option>
+                <option value="admin">Admin</option>
+                <option value="user">User</option>
+              </Form.Select>
+            </Form.Group>
 
             <Form.Group className="mb-3">
               <Form.Control
